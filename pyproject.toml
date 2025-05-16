@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AA-Opto-Electronic-MPDSnCxx-Interface"
+version = "0.1.0"
+description = "Python package for USB interfacing of the AA Opto-Electronic MPDSnCxx Radio Frequency Driver"
+authors = [
+    {name = "Edward Appleton", email = "edwardisaaca@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13.0"
+dependencies = [
+    "pyserial>=3.5",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/the-professor510/AA-Opto-Electronic-MPDSnCxx-Interface"
