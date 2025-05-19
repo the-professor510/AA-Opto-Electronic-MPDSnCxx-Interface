@@ -19,7 +19,7 @@ jobs:
           cd docs
           sphinx-apidoc -o ./source ../src -f
       - name: Make HTML
-      - run : |
+        run : |
           make html
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
