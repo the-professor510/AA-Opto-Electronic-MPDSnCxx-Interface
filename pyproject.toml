@@ -3,19 +3,17 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "AA-Opto-Electronic-MPDSnCxx-Interface2"
-version = "0.1.0"
-description = """
-Python package for USB interfacing of the AA Opto-Electronic MPDSnCxx 
-Radio Frequency Driver
-"""
+name = "AA-Opto-Electronic-MPDSnCxx-Interface"
+version = "1.0.0"
+description = """Python package for USB interfacing of the AA Opto-Electronic MPDSnCxx Radio Frequency Driver"""
 authors = [
     {name = "Edward Appleton", email = "edwardisaaca@gmail.com"}
 ]
 maintainers = [
     {name = "Edward Appleton", email = "edwardisaaca@gmail.com"}
 ]
-license = {file = 'LICEN[CS]E'}
+license = "MIT"
+license-files = ["*LICENSE*"]
 readme = "README.md"
 requires-python = ">=3.13.0"
 dependencies = [

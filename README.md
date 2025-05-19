@@ -11,7 +11,7 @@ Full documentation can be found at <https://the-professor510.github.io/AA-Opto-E
 
 To intsall MPDSnCxx_Interface using pip run:
 ```
-pip install MPDSnCxx_Interface
+pip install AA-Opto-Electronic-MPDSnCxx-Interface
 ```
 
 # Usage
