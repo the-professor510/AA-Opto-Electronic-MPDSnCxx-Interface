@@ -154,9 +154,9 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sweeping</strong> (<em>int</em>) – Sweeping mode - OFF/ON - g=0/1, by default None</p></li>
 <li><p><strong>frequencyStart</strong> (<em>float</em><em>, </em><em>optional</em>) – Start frequency (fff.ff = frequency value ex-75.206 – MHz), by default None</p></li>
-<li><p><strong>frequencyStop</strong> (<em>_type_</em><em>, </em><em>optional</em>) – Stop frequency (fff.ff = frequency value ex-84.260 – MHz), by default None</p></li>
-<li><p><strong>SweepingTime</strong> (<em>_type_</em><em>, </em><em>optional</em>) – Sweeping time in microseconds by steps of 1μs from 1 to 5000, by default None</p></li>
-<li><p><strong>store</strong> (<em>_type_</em><em>, </em><em>optional</em>) – Immediate store, by default None</p></li>
+<li><p><strong>frequencyStop</strong> (<em>float</em><em>, </em><em>optional</em>) – Stop frequency (fff.ff = frequency value ex-84.260 – MHz), by default None</p></li>
+<li><p><strong>SweepingTime</strong> (<em>int</em><em>, </em><em>optional</em>) – Sweeping time in microseconds by steps of 1μs from 1 to 5000, by default None</p></li>
+<li><p><strong>store</strong> (<em>bool</em><em>, </em><em>optional</em>) – Immediate store, by default None</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -182,8 +182,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.MPDSnCxx_Interface.MPDSnCxx_Interface.read_status">
-<span class="sig-name descname"><span class="pre">read_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/MPDSnCxx_Interface.html#MPDSnCxx_Interface.read_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.MPDSnCxx_Interface.MPDSnCxx_Interface.read_status" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">read_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">long_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/MPDSnCxx_Interface.html#MPDSnCxx_Interface.read_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.MPDSnCxx_Interface.MPDSnCxx_Interface.read_status" title="Link to this definition"></a></dt>
 <dd><p>Read the status of MPDSnCxx Radio Frequency Driver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>long_form</strong> (<em>bool</em>) – Display all the status, by default False</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

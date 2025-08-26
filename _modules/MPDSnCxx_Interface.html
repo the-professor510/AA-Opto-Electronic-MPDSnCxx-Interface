@@ -117,7 +117,7 @@
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_found</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">disconnectDevice</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">disconnect_device</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__device_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Device not found&quot;</span><span class="p">)</span>
@@ -308,11 +308,11 @@
 <span class="sd">            Sweeping mode - OFF/ON - g=0/1, by default None</span>
 <span class="sd">        frequencyStart : float, optional</span>
 <span class="sd">            Start frequency (fff.ff = frequency value ex-75.206 – MHz), by default None</span>
-<span class="sd">        frequencyStop : _type_, optional</span>
+<span class="sd">        frequencyStop : float, optional</span>
 <span class="sd">            Stop frequency (fff.ff = frequency value ex-84.260 – MHz), by default None</span>
-<span class="sd">        SweepingTime : _type_, optional</span>
+<span class="sd">        SweepingTime : int, optional</span>
 <span class="sd">            Sweeping time in microseconds by steps of 1μs from 1 to 5000, by default None</span>
-<span class="sd">        store : _type_, optional</span>
+<span class="sd">        store : bool, optional</span>
 <span class="sd">            Immediate store, by default None</span>
 
 <span class="sd">        Returns</span>
@@ -369,8 +369,13 @@
 
 <div class="viewcode-block" id="MPDSnCxx_Interface.read_status">
 <a class="viewcode-back" href="../MPDSnCxx_Interface.html#MPDSnCxx_Interface.MPDSnCxx_Interface.read_status">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">read_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">long_form</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the status of MPDSnCxx Radio Frequency Driver</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        long_form : bool</span>
+<span class="sd">            Display all the status, by default False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__write_to_device</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SER</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\r</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
@@ -378,14 +383,17 @@
 
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">num_chan_set</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">bPassed</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SER</span><span class="o">.</span><span class="n">in_waiting</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            
+            <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="n">bPassed</span> <span class="ow">and</span> <span class="n">long_form</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="sa">b</span><span class="s2">&quot;?&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">bPassed</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">num_chan_set</span><span class="p">:</span> 
                     <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">2</span>
                     <span class="n">num_chan_set</span> <span class="o">=</span> <span class="kc">True</span>
@@ -397,8 +405,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">num_chan_set</span><span class="p">):</span> 
-            <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">3</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">3</span></div>
 
 
 <div class="viewcode-block" id="MPDSnCxx_Interface.send_quick_command">
