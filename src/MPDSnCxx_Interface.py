@@ -42,7 +42,7 @@ class MPDSnCxx_Interface:
 
     def __del__(self):
         if self.device_found:
-            self.disconnectDevice()
+            self.disconnect_device()
 
     def __device_not_found(self):
         print("\nDevice not found")
@@ -219,11 +219,11 @@ class MPDSnCxx_Interface:
             Sweeping mode - OFF/ON - g=0/1, by default None
         frequencyStart : float, optional
             Start frequency (fff.ff = frequency value ex-75.206 – MHz), by default None
-        frequencyStop : _type_, optional
+        frequencyStop : float, optional
             Stop frequency (fff.ff = frequency value ex-84.260 – MHz), by default None
-        SweepingTime : _type_, optional
+        SweepingTime : int, optional
             Sweeping time in microseconds by steps of 1μs from 1 to 5000, by default None
-        store : _type_, optional
+        store : bool, optional
             Immediate store, by default None
 
         Returns
@@ -277,8 +277,13 @@ class MPDSnCxx_Interface:
         command = command + "\n\r"
         self.SER.write(command.encode())
 
-    def read_status(self):
+    def read_status(self, long_form=False):
         """Read the status of MPDSnCxx Radio Frequency Driver
+        
+        Parameters
+        ----------
+        long_form : bool
+            Display all the status, by default False
         """
         self.__write_to_device("S")
         self.SER.read_until("\n\r".encode())
@@ -286,14 +291,17 @@ class MPDSnCxx_Interface:
 
         count = 0
         num_chan_set = False
+        bPassed = False
 
-        print(self.SER.in_waiting)
-
-        print("Status:", end = " ")
+        print("Status:\n", end = " ")
         while line != b"":
-            print(line)
+            
+            if(not bPassed and long_form):
+                print(line)
+                
             count += 1
             if b"?" in line:
+                bPassed = True
                 if not num_chan_set: 
                     self.num_channels = count - 2
                     num_chan_set = True
@@ -306,7 +314,6 @@ class MPDSnCxx_Interface:
 
         if (not num_chan_set): 
             self.num_channels = count - 3
-            print(count)
 
     def send_quick_command(self, command):
         """Sends a command to MPDSnCxx Radio Frequency Driver
