@@ -104,6 +104,8 @@ class MPDSnCxx_Interface:
         """
         self.SER.close()
         print("\nPort Closed")
+        
+        self.device_found = False
 
     def print_self(self):
         """Print to terminal the settings for the USB connection
@@ -296,7 +298,9 @@ class MPDSnCxx_Interface:
         print("Status:\n", end = " ")
         while line != b"":
             
-            if(not bPassed and long_form):
+            if not bPassed:
+                print(line)
+            elif long_form:
                 print(line)
                 
             count += 1
@@ -305,7 +309,6 @@ class MPDSnCxx_Interface:
                 if not num_chan_set: 
                     self.num_channels = count - 2
                     num_chan_set = True
-                    print(count - 2)
                 self.__write_to_device("")
 
             line = self.SER.read_until("\n\r".encode())

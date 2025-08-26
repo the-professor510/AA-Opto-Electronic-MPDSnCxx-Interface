@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "AA-Opto-Electronic-MPDSnCxx-Interface"
-version = "1.0.1"
+version = "1.0.2"
 description = """Python package for USB interfacing of the AA Opto-Electronic MPDSnCxx Radio Frequency Driver"""
 authors = [
     {name = "Edward Appleton", email = "edwardisaaca@gmail.com"}
